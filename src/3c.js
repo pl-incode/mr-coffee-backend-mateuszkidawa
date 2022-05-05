@@ -7,9 +7,7 @@ app.set("views", `${__dirname}/../views`);
 app.set("view engine", "mustache");
 app.engine("mustache", mustacheExpress());
 app.use(bodyParser.json());
-app.use(
-  bodyParser.urlencoded({ extended: false })
-);
+app.use(bodyParser.urlencoded({ extended: false }));
 const { Pool } = require("pg");
 const pool = new Pool({
   user: "postgres",
@@ -21,9 +19,7 @@ const pool = new Pool({
 
 app.get("/", async (req, res) => {
   const schedules = (
-    await pool.query(
-      `SELECT * FROM schedules;`
-    )
+    await pool.query(`SELECT * FROM schedules;`)
   ).rows;
   res.json(schedules);
 });

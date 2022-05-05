@@ -2,7 +2,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const myData = require("./data");
 const app = express();
-const sha256 = require("js-sha256");
 const mustacheExpress = require("mustache-express");
 
 app.set("views", `${__dirname}/../views`);
@@ -58,29 +57,29 @@ app.get("/users/:id/schedules", (req, res) => {
   res.json(arr);
 });
 
-app.post("/users", (req, res) => {
-  const newUser = req.body;
-  const b = {
-    firstname: newUser.firstname,
-    lastname: newUser.lastname,
-    email: newUser.email,
-    password: sha256(newUser.password),
-  };
-  myData.users.push(b);
-  res.json(b);
-});
+// app.post("/users", (req, res) => {
+//   const newUser = req.body;
+//   const b = {
+//     firstname: newUser.firstname,
+//     lastname: newUser.lastname,
+//     email: newUser.email,
+//     password: sha256(newUser.password),
+//   };
+//   myData.users.push(b);
+//   res.json(b);
+// });
 
-app.post("/schedules", (req, res) => {
-  const newSchedule = req.body;
-  const b = {
-    user_id: parseInt(newSchedule.user_id),
-    day: parseInt(newSchedule.day),
-    start_at: newSchedule.start_at,
-    end_at: newSchedule.end_at,
-  };
-  myData.schedules.push(b);
-  res.json(b);
-});
+// app.post("/schedules", (req, res) => {
+//   const newSchedule = req.body;
+//   const b = {
+//     user_id: parseInt(newSchedule.user_id),
+//     day: parseInt(newSchedule.day),
+//     start_at: newSchedule.start_at,
+//     end_at: newSchedule.end_at,
+//   };
+//   myData.schedules.push(b);
+//   res.json(b);
+// });
 
 app.listen(3000, () => {
   console.log(`http://localhost:3000/ is waiting for requests.`);
